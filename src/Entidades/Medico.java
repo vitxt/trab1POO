@@ -58,10 +58,12 @@ public class Medico {
                     System.out.print("Qual a enfermidade?\n");
                     String e = sc.nextLine();
                     paciente.addEnfermidade(e);
+                    break;
                 case 2:
                     System.out.print("Qual a enfermidade?\n");
                     String e_rem = sc.nextLine();
                     paciente.getEnfermidades().remove(e_rem);
+                    break;
                 case 3:
                     System.out.print("Qual a enfermidade?\n");
                     String e_att = sc.nextLine();
@@ -72,6 +74,7 @@ public class Medico {
                             enfermidade = sc.nextLine();
                         }
                     }
+                    break;
                 case 0:
             }
             ;
@@ -99,9 +102,11 @@ public class Medico {
                 case 1:
                     System.out.println("Digite o novo diagnostico:\n");
                     paciente.getProntuario().setDiagnostico(sc.nextLine());
+                    break;
                 case 2:
                     System.out.println("Digite a nova prescricao:\n");
                     paciente.getProntuario().setPrescricao(sc.nextLine());
+                    break;
                 case 3:
                     int opt2 = -1;
                     while (opt2 != 0) {
@@ -111,12 +116,17 @@ public class Medico {
                             case 1:
                                 System.out.println("Digite o sintomas a ser removido:\n");
                                 paciente.getProntuario().getSintomas().remove(sc.nextLine());
+                                break;
                             case 2:
                                 System.out.println("Digite o sintoma a ser adicionada:\n");
                                 paciente.getProntuario().addSintoma(sc.nextLine());
+                                break;
                             case 0:
+                                break;
                         }
                     }
+                    break;
+                case 0:
             }
         }
 
@@ -144,7 +154,9 @@ public class Medico {
                 case 1:
                     System.out.print("Qual o sintomas?\n");
                     paciente.getProntuario().addSintoma(sc.nextLine());
+                    break;
                 case 0:
+                    break;
             }
             ;
         }

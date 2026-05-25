@@ -59,23 +59,28 @@ public class Secretaria {
                     System.out.print("Qual o novo nome?\n");
                     String novo_nome = sc.nextLine();
                     paciente.setNome(novo_nome);
+                    break;
                 case 2:
                     
                     System.out.print("Qual o novo convenio?\n");
                     String novo_convenio = sc.nextLine();
                     paciente.setConvenio(novo_convenio);
+                    break;
                 case 3:
                     System.out.print("Qual o novo endereço?\n");
                     String novo_end = sc.nextLine();
                     paciente.setEndereco(novo_end);
+                    break;
                 case 4:
                     System.out.print("Qual o novo nascimento?\n");
                     String novo_nasc = sc.nextLine();
                     paciente.setNascimento(novo_nasc);
+                    break;
                 case 5:
                     System.out.print("Qual o novo telefone?\n");
                     String novo = sc.nextLine();
                     paciente.setTelefone(novo);
+                    break;
                 case 0:
             }                
         }
@@ -87,7 +92,7 @@ public class Secretaria {
         String telefone = sc.nextLine();
         Optional<Paciente> p = this.RetornaPacientePeloTelefone (ListaPacientes, telefone);
         if (!p.isEmpty()){
-                   ListaPacientes.remove(p);
+                   ListaPacientes.remove(p.get());
         } else {System.out.print("Paciente não existe!");};
     }
      
@@ -159,14 +164,17 @@ public class Secretaria {
                     };
                     Paciente paciente = this.RetornaPacientePeloTelefone(pacientes, telefone).get();
                     c.setP(paciente);
+                    break;
                 case 2:
                     System.out.print("Qual a nova data?\n");
                     String data = sc.nextLine();
                     c.setData(data);
+                    break;
                 case 3:
                     System.out.print("Qual o novo horario?\n");
                     String novo_horario = sc.nextLine();
                     c.setHorario(novo_horario);
+                    break;
                 case 4:
                     System.out.println("Digite o nome do Medico:\n");
                     String nome = sc.nextLine();
@@ -176,10 +184,12 @@ public class Secretaria {
                     };
                     Medico medico = this.RetornaMedicoPeloNome(medicos, nome).get();
                     c.setM(medico);
+                    break;
                 case 5:
                     System.out.print("Qual o novo tipo?\n");
                     String tipo = sc.nextLine();
                     c.setTipo(tipo);
+                    break;
                 case 0:
             }                
         }

@@ -6,7 +6,6 @@ package Documentos;
 
 import Entidades.Medico;
 import Entidades.Paciente;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**

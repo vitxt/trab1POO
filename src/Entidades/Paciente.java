@@ -5,7 +5,6 @@
 package Entidades;
 
 import Documentos.Prontuario;
-import Documentos.RelatorioMed;
 import java.util.ArrayList;
 import java.util.Scanner;
 
