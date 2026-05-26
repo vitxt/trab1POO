@@ -1,17 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Entidades;
 
 import Documentos.Prontuario;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- *
- * @author guest-kt6far
- */
+
 public class Paciente {
     private String nome;
     private String nascimento;
@@ -23,7 +16,7 @@ public class Paciente {
     private ArrayList<String> mensagens = new ArrayList<>();
     private ArrayList<String> enfermidades = new ArrayList();
     private Scanner sc = new Scanner(System.in);
-
+    //construtor da classe paciente com os parametros: nome, data de nascimento, endereço, email, telefone e convenio
     public Paciente (String nome, String nascimento, String endereco,String email, String telefone, String convenio) {
         this.nome = nome;
         this.convenio =convenio;
@@ -32,11 +25,11 @@ public class Paciente {
         this.email = email;
         this.telefone = telefone;
     }
-    
+    // remove o paciente do prontuario
     public void resetProntuario (){
         this.prontuario = null;
     }
-
+    //metodos gets e sets da classe Paciente
     public Prontuario getProntuario() {
         return prontuario;
     }
