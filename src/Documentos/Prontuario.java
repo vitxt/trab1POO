@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Documentos;
 
 import java.util.ArrayList;
@@ -11,20 +8,27 @@ import java.util.ArrayList;
  * @author guest-kt6far
  */
 public class Prontuario {
-    private ArrayList<String> sintomas = new ArrayList<>();
+    // Lista de sintomas registrados no prontuário
+    private ArrayList<String> sintomas = new ArrayList<>(); 
+     // Diagnóstico médico do paciente
     private String diagnostico;
+    // Prescrição médica recomendada
     private String prescricao;
-
+     /**
+     * Construtor que inicializa o prontuário com diagnóstico e prescrição.
+     */
     public Prontuario(String diagnostico, String prescricao) {
         this.diagnostico = diagnostico;
         this.prescricao = prescricao;
     }
+    //construtor vazio da classe prontuario
     public Prontuario() {
     }
+    // Adiciona um sintoma ao prontuário do paciente.
     public void addSintoma (String s){
         this.sintomas.add(s);
     }
-
+    //métodos gets e sets dos atributos
     public String getDiagnostico() {
         return diagnostico;
     }
@@ -36,7 +40,7 @@ public class Prontuario {
     public String getPrescricao() {
         return prescricao;
     }
-
+    //getter da lista de sintomas
     public ArrayList<String> getSintomas() {
         return sintomas;
     }
