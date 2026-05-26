@@ -1,12 +1,8 @@
-
 package Documentos;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author guest-kt6far
- */
+
 public class Prontuario {
     // Lista de sintomas registrados no prontuário
     private ArrayList<String> sintomas = new ArrayList<>(); 
