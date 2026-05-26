@@ -1,6 +1,14 @@
 package Documentos;
 
-
+/**
+ * Classe responsável por representar um relatório médico.
+ * 
+ * O relatório pode conter:
+ * - receita médica
+ * - atestado
+ * - declaração de acompanhamento
+ * - nome do paciente
+ */
 public class RelatorioMed {
     private String receita;
     private String atestado;
