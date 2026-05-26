@@ -3,8 +3,11 @@ package Entidades;
 import Documentos.Prontuario;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-
+ /* Classe responsável por representar um paciente no sistema da clínica.
+ * 
+ * A classe armazena informações pessoais, prontuário médico,
+ * mensagens e histórico de enfermidades do paciente.
+ */
 public class Paciente {
     private String nome;
     private String nascimento;
