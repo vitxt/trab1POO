@@ -5,6 +5,7 @@
 package Entidades;
 
 import Documentos.Consulta;
+
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Scanner;
@@ -12,13 +13,13 @@ import java.util.Scanner;
 public class Secretaria {
     private String nome;
     private Scanner sc = new Scanner(System.in);
-    
-    
-    public Secretaria (String nome){
+
+
+    public Secretaria(String nome) {
         this.nome = nome;
     }
-    
-    public void CriaPaciente (ArrayList<Paciente> listaPacientes){
+
+    public Paciente CriaPaciente(ArrayList<Paciente> listaPacientes) {
         System.out.print("Digite o nome do paciente\n");
         String nome = sc.nextLine();
         System.out.print("Possui convênio particular/plano de saude\n");
@@ -31,37 +32,40 @@ public class Secretaria {
         String telefone = sc.nextLine();
         System.out.print("Digite o email do paciente\n");
         String email = sc.nextLine();
-        
+
         Paciente p = new Paciente(nome, nascimento, endereco, email, telefone, convenio);
 
-        if (this.RetornaPacientePeloTelefone(listaPacientes, telefone).isEmpty()){
+        if (this.RetornaPacientePeloTelefone(listaPacientes, telefone).isEmpty()) {
             listaPacientes.add(p);
         }
+        return p;
     }
-    
-    public void AtualizaPaciente (ArrayList<Paciente> ListaPaciente){
+
+    public void AtualizaPaciente(ArrayList<Paciente> ListaPaciente) {
         System.out.print("Digite o telefone do paciente\n");
         String telefone = sc.nextLine();
-        
-        Optional<Paciente> p = this.RetornaPacientePeloTelefone (ListaPaciente, telefone);
-        if (p.isEmpty()){
+
+        Optional<Paciente> p = this.RetornaPacientePeloTelefone(ListaPaciente, telefone);
+        if (p.isEmpty()) {
             System.out.print("Paciente não encontrado!");
             return;
-        };
+        }
+        ;
 
         Paciente paciente = p.get();
         int opt = -1;
-        while (opt != 0){
-        System.out.print("O que deseja alterar?\n1-nome\n2-convênio\n3-endereço\n4-nascimento\n5-telefone\n0-sair\n");
-        opt = sc.nextInt();
-        switch (opt){
+        while (opt != 0) {
+            System.out.print("O que deseja alterar?\n1-nome\n2-convênio\n3-endereço\n4-nascimento\n5-telefone\n0-sair\n");
+            opt = sc.nextInt();
+            sc.nextLine();
+            switch (opt) {
                 case 1:
                     System.out.print("Qual o novo nome?\n");
                     String novo_nome = sc.nextLine();
                     paciente.setNome(novo_nome);
                     break;
                 case 2:
-                    
+
                     System.out.print("Qual o novo convenio?\n");
                     String novo_convenio = sc.nextLine();
                     paciente.setConvenio(novo_convenio);
@@ -82,86 +86,85 @@ public class Secretaria {
                     paciente.setTelefone(novo);
                     break;
                 case 0:
-            }                
+            }
         }
         return;
     }
-    
-    public void RemovePaciente (ArrayList<Paciente> ListaPacientes){
+
+    public void RemovePaciente(ArrayList<Paciente> ListaPacientes) {
         System.out.print("Qual o telefone?\n");
         String telefone = sc.nextLine();
-        Optional<Paciente> p = this.RetornaPacientePeloTelefone (ListaPacientes, telefone);
-        if (!p.isEmpty()){
-                   ListaPacientes.remove(p.get());
-        } else {System.out.print("Paciente não existe!");};
-    }
-     
-    private Optional<Paciente> RetornaPacientePeloTelefone (ArrayList<Paciente> ListaPacientes, String telefone) {
-    for (Paciente p : ListaPacientes){
-            if (p.getTelefone().equals(telefone)){
-                 return Optional.ofNullable(p);       
-            }
+        Optional<Paciente> p = this.RetornaPacientePeloTelefone(ListaPacientes, telefone);
+        if (!p.isEmpty()) {
+            ListaPacientes.remove(p.get());
+        } else {
+            System.out.print("Paciente não existe!");
         }
-    return null;
+        ;
     }
 
-    public void CriaConsulta (ArrayList<Paciente> pacientes, ArrayList<Medico> medicos, ArrayList<Consulta> consultas){
-       
-       System.out.print("Digite o telefone do Paciente:\n");
-       String tele = sc.nextLine();
+    public void CriaConsulta(ArrayList<Paciente> pacientes, ArrayList<Medico> medicos, ArrayList<Consulta> consultas) {
 
-       if (this.RetornaPacientePeloTelefone(pacientes, tele).isEmpty()){
-       System.out.print("Paciente nao cadastrado\n");
-            this.CriaPaciente(pacientes);
-       }
+        System.out.print("Digite o telefone do Paciente:\n");
+        String tele = sc.nextLine();
+        Paciente p;
+        if (this.RetornaPacientePeloTelefone(pacientes, tele).isEmpty()) {
+            System.out.print("Paciente nao cadastrado\n");
+             p = this.CriaPaciente(pacientes);
+        } else {
+             p = this.RetornaPacientePeloTelefone(pacientes, tele).get();
+        }
+        ;
 
-       Paciente p = this.RetornaPacientePeloTelefone(pacientes, tele).get();
+        System.out.print("Digite o nome do Medico:\n");
+        String nome_m = sc.nextLine();
+        Medico m;
+        if (this.RetornaMedicoPeloNome(medicos, nome_m).isEmpty()) {
+            System.out.print("Medico nao cadastrado\n");
+            m = this.CriaMedico(medicos);
+        } else {
+            m = this.RetornaMedicoPeloNome(medicos, nome_m).get();
+        }
+        System.out.print("Digite a data (dd/mm/aaaa):");
+        String data = sc.nextLine();
+        System.out.print("Digite o horário (hh:mm):");
+        String horario = sc.nextLine();
+        System.out.print("Digite o tipo da consulta(normal/retorno):");
+        String tipo = sc.nextLine();
 
-       System.out.print("Digite o nome do Medico:\n");
-       String nome_m = sc.nextLine();
 
-       if (this.RetornaMedicoPeloNome(medicos, nome_m).isEmpty()) {
-           System.out.print("Medico nao cadastrado\n");
-           this.CriaMedico(medicos);
-       }
-       Medico m = this.RetornaMedicoPeloNome(medicos, nome_m).get();
-        
-       System.out.print("Digite a data (dd/mm/aaaa)");
-       String data = sc.nextLine();
-       System.out.print("Digite o horário (hh:mm):");
-       String horario = sc.nextLine();
-       System.out.print("Digite o tipo da consulta(normal/retorno):");
-       String tipo = sc.nextLine();
-       
+        Consulta c = new Consulta(p, data, horario, m, tipo);
 
-       Consulta c = new Consulta(p, data, horario, m, tipo);
-       
-       if (!consultas.contains(c)) {
-           consultas.add(c);
-       }
-    };
+        if (!consultas.contains(c)) {
+            consultas.add(c);
+        }
+    }
 
-    public void AtualizaConsulta (ArrayList<Consulta> consultas,ArrayList<Paciente> pacientes,  ArrayList<Medico> medicos) {
+    ;
+
+    public void AtualizaConsulta(ArrayList<Consulta> consultas, ArrayList<Paciente> pacientes, ArrayList<Medico> medicos) {
         System.out.print("Digite o horario da consulta(Ex:13:24)\n");
         String horario = sc.nextLine();
-        
-        if (this.RetornaConsultaPeloHorario(consultas,horario).isEmpty()){
+
+        if (this.RetornaConsultaPeloHorario(consultas, horario).isEmpty()) {
             System.out.print("Consulta não encontrada!");
             return;
-        };
+        }
+        ;
         Consulta c = this.RetornaConsultaPeloHorario(consultas, horario).get();
         int opt = -1;
-        while (opt != 0){
-        System.out.print("O que deseja alterar?\n1-Paciente\n2-Data\n3-Horario\n4-Medico\n5-Tipo\n0-sair\n");
-        opt = sc.nextInt();
-        switch (opt){
+        while (opt != 0) {
+            System.out.print("O que deseja alterar?\n1-Paciente\n2-Data\n3-Horario\n4-Medico\n5-Tipo\n0-sair\n");
+            opt = sc.nextInt();
+            switch (opt) {
                 case 1:
                     System.out.println("Digite o telefone do Paciente:\n");
                     String telefone = sc.nextLine();
-                    if (this.RetornaPacientePeloTelefone(pacientes, telefone).isEmpty()){
+                    if (this.RetornaPacientePeloTelefone(pacientes, telefone).isEmpty()) {
                         System.out.print("Paciente nao cadastrado\n");
                         this.CriaPaciente(pacientes);
-                    };
+                    }
+                    ;
                     Paciente paciente = this.RetornaPacientePeloTelefone(pacientes, telefone).get();
                     c.setP(paciente);
                     break;
@@ -178,10 +181,11 @@ public class Secretaria {
                 case 4:
                     System.out.println("Digite o nome do Medico:\n");
                     String nome = sc.nextLine();
-                    if (this.RetornaMedicoPeloNome(medicos,nome).isEmpty()){
+                    if (this.RetornaMedicoPeloNome(medicos, nome).isEmpty()) {
                         System.out.print("Medico nao cadastrado\n");
                         this.CriaMedico(medicos);
-                    };
+                    }
+                    ;
                     Medico medico = this.RetornaMedicoPeloNome(medicos, nome).get();
                     c.setM(medico);
                     break;
@@ -191,66 +195,79 @@ public class Secretaria {
                     c.setTipo(tipo);
                     break;
                 case 0:
-            }                
+            }
         }
     }
 
-    public void remConsulta (ArrayList<Consulta> consultas) {
+    public void remConsulta(ArrayList<Consulta> consultas) {
         System.out.print("Digite o horario da consulta(Ex:13:24)\n");
         String horario = sc.nextLine();
-        if (!this.RetornaConsultaPeloHorario(consultas,horario).isEmpty()){
+        if (this.RetornaConsultaPeloHorario(consultas, horario).isEmpty()) {
             System.out.print("Consulta não encontrada!");
             return;
-        } else { consultas.remove(this.RetornaConsultaPeloHorario(consultas, horario).get()); };
-
-    }
-
-    public Optional<Consulta> RetornaConsultaPeloHorario(ArrayList<Consulta> consultas, String horario) {
-    for (Consulta c : consultas){
-            if (c.getHorario().equals(horario)){
-                 return Optional.ofNullable(c);       
-            }
+        } else {
+            consultas.remove(this.RetornaConsultaPeloHorario(consultas, horario).get());
         }
-    return null;
+        ;
+
     }
 
-    public void CriaMedico (ArrayList<Medico> listaMedicos){
+    public Medico CriaMedico(ArrayList<Medico> listaMedicos) {
         System.out.print("Digite o nome do medico:\n");
         String nome = sc.nextLine();
+        Medico medico = new Medico(nome);
 
-        if (this.RetornaMedicoPeloNome(listaMedicos, nome).isEmpty()){
-            Medico medico = new Medico(nome);
+        if (this.RetornaMedicoPeloNome(listaMedicos, nome).isEmpty()) {
             listaMedicos.add(medico);
         }
-    }
-    
-    public Optional<Medico> RetornaMedicoPeloNome(ArrayList<Medico> ListaMedicos, String nome) {
-    for (Medico m: ListaMedicos){
-            if (m.getNome().equals(nome)){
-                 return Optional.ofNullable(m);       
-            }
-        }
-    return null;
+        return medico;
     }
 
-    public void ConsultasDiaSeguinte (ArrayList<Consulta> listaConsultas){
-        System.out.println("Digite o dia de hoje(dd/mm/aaaa):\n");
+    public void ConsultasDiaSeguinte(ArrayList<Consulta> listaConsultas) {
+        System.out.println("Digite o dia de amanha(dd/mm/aaaa):\n");
         String data = sc.nextLine();
         ArrayList<Consulta> consultas_seguintes = new ArrayList<>();
-        for (Consulta c : listaConsultas){
-            if (c.getData().equals(data)){
+        for (Consulta c : listaConsultas) {
+            if (c.getData().equals(data)) {
                 consultas_seguintes.add(c);
                 System.out.println("Pacientes de amanha que possuem email ou telefone cadastrados:\n");
-                if (c.getP().getTelefone().length() > 0 || !c.getP().getEmail().equals("")){
-                    System.out.println(c.toString()+"\n");
+                if (c.getP().getTelefone().length() > 0 || !c.getP().getEmail().equals("")) {
+                    System.out.println(c.toString() + "\n");
                 }
             }
         }
         System.out.println("Pacientes sem dados de contato:\n");
-        for  (Consulta c : consultas_seguintes){
-            if (c.getP().getTelefone().length()==0 && c.getP().getEmail().equals("")){
-                System.out.println(c.toString()+"\n");
+        for (Consulta c : consultas_seguintes) {
+            if (c.getP().getTelefone().length() == 0 && c.getP().getEmail().equals("")) {
+                System.out.println(c.toString() + "\n");
             }
         }
+    }
+
+    private Optional<Paciente> RetornaPacientePeloTelefone(ArrayList<Paciente> ListaPacientes, String telefone) {
+        for (Paciente p : ListaPacientes) {
+            if (p.getTelefone().equals(telefone)) {
+                return Optional.of(p);
+            }
+        }
+        return Optional.empty();
+    }
+
+    public Optional<Consulta> RetornaConsultaPeloHorario(ArrayList<Consulta> consultas, String horario) {
+        for (Consulta c : consultas) {
+            if (c.getHorario().equals(horario)) {
+                return Optional.of(c);
+            }
+        }
+        return Optional.empty();
+    }
+
+    public Optional<Medico> RetornaMedicoPeloNome(ArrayList<Medico> ListaMedicos, String nome) {
+        for (Medico m : ListaMedicos) {
+            if (m.getNome().equals(nome)) {
+                return Optional.of(m);
+            }
+        }
+        return Optional.empty();
     }
 }

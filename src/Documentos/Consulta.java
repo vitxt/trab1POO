@@ -36,6 +36,11 @@ public class Consulta {
         return data;
     }
 
+    @Override
+    public String toString() {
+        return "Consulta -> Data: " + data + " | Horário: " + horario + " | Paciente: " + p.getNome() + " | Médico: " + m.getNome();
+    }
+
     public void setData(String data) {
         this.data = data;
     }

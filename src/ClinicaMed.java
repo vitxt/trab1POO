@@ -33,10 +33,11 @@ public class ClinicaMed {
             System.out.println("3 - Enviar mensagens");
             System.out.println("0 - Sair do Sistema");
             opcao = sc.nextInt();
+            sc.nextLine(); // CORREÇÃO: Consome o "Enter"
 
             switch (opcao) {
                 case 1:
-                    System.out.println("Digite o nome da secretaria:\n ");
+                    System.out.print("Digite o nome da secretaria: ");
                     Secretaria secretaria = new Secretaria(sc.nextLine());
                     menuSecretaria(secretaria,consultas,medicos,pacientes);
                     break;
@@ -44,7 +45,7 @@ public class ClinicaMed {
                     menuMedico(medicos, pacientes);
                     break;
                 case 3:
-                    System.out.print("Digite a data para enviar os avisos: ");
+                    System.out.print("Digite a data para enviar os avisos (dd/mm/aaaa): ");
                     String data = sc.nextLine();
                     mensageiro.dispararLembretesDeConsulta(consultas, data);
                     break;
@@ -59,7 +60,6 @@ public class ClinicaMed {
         Scanner sc = new Scanner(System.in);
         int opt = -1;
         while (opt != 0) {
-            System.out.println("\n--- MENU SECRETARIA ---");
             System.out.println("1 - Cadastrar Paciente");
             System.out.println("2 - Atualizar Paciente");
             System.out.println("3 - Remover Paciente");
@@ -68,7 +68,6 @@ public class ClinicaMed {
             System.out.println("6 - Remover Consulta");
             System.out.println("7 - Relatório de Consultas do dia Seguinte");
             System.out.println("0 - Voltar");
-            System.out.print("Escolha a ação: ");
             opt = sc.nextInt();
             switch (opt) {
                 case 1: sec.CriaPaciente(pacientes); break;

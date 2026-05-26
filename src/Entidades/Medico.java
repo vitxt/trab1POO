@@ -193,10 +193,9 @@ public class Medico {
     private Optional<Paciente> RetornaPacientePeloTelefone(ArrayList<Paciente> ListaPacientes, String telefone) {
         for (Paciente p : ListaPacientes) {
             if (p.getTelefone().equals(telefone)) {
-                return Optional.ofNullable(p);
+                return Optional.of(p);
             }
         }
-        return null;
+        return Optional.empty();
     }
-
 }
