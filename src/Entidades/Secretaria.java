@@ -203,6 +203,7 @@ public class Secretaria {
         while (opt != 0) {
             System.out.print("O que deseja alterar?\n1-Paciente\n2-Data\n3-Horario\n4-Medico\n5-Tipo\n0-sair\n");
             opt = sc.nextInt();
+            sc.nextLine();
             switch (opt) {
                 case 1:
                     System.out.println("Digite o telefone do Paciente:\n");
@@ -211,6 +212,7 @@ public class Secretaria {
                         System.out.print("Paciente nao cadastrado\n");
                         this.CriaPaciente(pacientes);
                     }
+
                     ;
                     Paciente paciente = this.RetornaPacientePeloTelefone(pacientes, telefone).get();
                     c.setP(paciente);
